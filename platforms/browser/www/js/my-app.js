@@ -13,6 +13,9 @@ var vz_dayevent = '';
 var vz_monthevent = '';
 var vz_yearevent = '';
 var active_count = 0;
+var next_prev_month ='';
+var mnthtopass = '';
+var yeartopass = '';
 
 var myApp = new Framework7({
     pushState: false,
@@ -223,7 +226,7 @@ myApp.onPageInit('machine_list', function(page) {
                         '</div>'+
                         '<div class="col-85">'+
                             '<p class="prev_abhishek" style="margin-bottom:0%;">'+machine_prev_details[i].date+' '+machine_prev_details[i].name+'</p>'+
-                            '<p class="prev_abhishek" style="margin:0%;font-size: 12px;">'+tConvert(machine_prev_details[i].start_time)+'-'+tConvert(machine_prev_details[i].end_time)+'</p>'+
+                            '<p class="prev_abhishek" style="margin:3% 0%;font-size: 12px;">'+tConvert(machine_prev_details[i].start_time)+'-'+tConvert(machine_prev_details[i].end_time)+'</p>'+
                             '<p class="prev_abhishek" style="margin: 0% 0% 4% 0%;font-size: 12px;">'+machine_prev_details[i].address+'</p>'+
                         '</div>'+
                     '</div>  ';
@@ -248,11 +251,11 @@ myApp.onPageInit('machine_list', function(page) {
             if (machine_current_details[i].date) {
                 html += '<div class="col-45">'+
                             '<p class="prev_abhishek" style="margin:10% 0% 0%;"><b>'+machine_current_details[i].date+'</b></p>'+
-                            '<p class="prev_abhishek" style="margin:0%;font-size: 12px;">'+tConvert(machine_current_details[i].start_time)+'-'+tConvert(machine_current_details[i].end_time)+'</p>'+
+                            '<p class="prev_abhishek" style="margin:3% 0%;font-size: 12px;">'+tConvert(machine_current_details[i].start_time)+'-'+tConvert(machine_current_details[i].end_time)+'</p>'+
                             '<p class="prev_abhishek" style="margin: 0% 0% 4% 0%;font-size: 12px;">'+machine_current_details[i].address+'</p>'+
                         '</div>'+
                         '<div class="col-40 ">'+
-                            '<p class="prev_abhishek" style="margin-bottom:0%;color:'+color_mrng+';font-size: 12px;">Morning-8am-2pm</p>'+
+                            '<p class="prev_abhishek" style="margin-bottom:3.5%;color:'+color_mrng+';font-size: 12px;">Morning-8am-2pm</p>'+
                             '<p class="prev_abhishek" style="margin:0%;color:'+color_evng+';font-size: 12px;">Eveing-2pm-8pm</p>'+
                         '</div>'+
                     '</div>';
@@ -263,7 +266,7 @@ myApp.onPageInit('machine_list', function(page) {
                             '<p class="prev_abhishek"></p>'+
                         '</div>'+
                         '<div class="col-40">'+
-                            '<p class="prev_abhishek" style="color:#92C384;font-size: 12px; margin-bottom: 0">Morning-8am-2pm</p>'+
+                            '<p class="prev_abhishek" style="color:#92C384;font-size: 12px; margin-bottom: 3.5%">Morning-8am-2pm</p>'+
                             '<p class="prev_abhishek" style="color:#92C384;font-size: 12px; margin: 0">Eveing-2pm-8pm</p>'+
                         '</div>'+
                     '</div>';
@@ -276,7 +279,7 @@ myApp.onPageInit('machine_list', function(page) {
                         '</div>'+
                         '<div class="col-85">'+
                             '<p class="prev_abhishek" style="margin-bottom:0%;">'+machine_next_details[i].date+' '+machine_next_details[i].name+'</p>'+
-                            '<p class="prev_abhishek" style="margin:0%;font-size: 12px;">'+tConvert(machine_next_details[i].start_time)+'-'+tConvert(machine_next_details[i].end_time)+'</p>'+
+                            '<p class="prev_abhishek" style="margin:3% 0%;font-size: 12px;">'+tConvert(machine_next_details[i].start_time)+'-'+tConvert(machine_next_details[i].end_time)+'</p>'+
                             '<p class="prev_abhishek" style="margin: 0% 0% 4% 0%;font-size: 12px;">'+machine_next_details[i].address+'</p>'+
                         '</div>'+
                     '</div>';
@@ -341,14 +344,14 @@ myApp.onPageInit('machine_booking', function(page) {
                 // console.log('done: ' + j2s(res));
                 if (res.status == 'SUCCESS') {
                     // console.log(res.doctors_data);
-                    $.each( res.doctors_data, function( key, value ) {
-                        $("#doctor_speciality").val(value.specialities);
-                        if (value.gov_non_gov == 'No') {
-                            $("#doctor_type").val('Non Government');  
-                        } else {
-                            $("#doctor_type").val('Government'); 
-                        }
-                    });
+                    // $.each( res.doctors_data, function( key, value ) {
+                    //     // $("#doctor_speciality").val(value.specialities);
+                    //     if (value.gov_non_gov == 'No') {
+                    //         $("#doctor_type").val('Non Government');  
+                    //     } else {
+                    //         $("#doctor_type").val('Government'); 
+                    //     }
+                    // });
                     if (!res.address == '') {
                         $("#doctor_address").val(res.address);
                     } 
@@ -409,10 +412,10 @@ myApp.onPageInit('technician_view', function(page) {
                 if (value.status == 'Start') {
                     html += '<div class="camp_Id">'+
                                 '<h3><b>Camp Id :</b>'+value.id+'</h3>'+
-                                '<p><b>Doctor Name</b>: '+value.name+'</p>'+
-                                '<p><b>Booked Date</b>: '+date_to_date_string1(value.date)+'</p>'+
-                                '<p><b>Time</b>:'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
-                                '<p><b>Location :</b>:'+value.address+'</p>'+
+                                '<p class="techni_page_p_tag"><b>Doctor Name</b>: '+value.name+'</p>'+
+                                '<p class="techni_page_p_tag"><b>Booked Date</b>: '+date_to_date_string1(value.date)+'</p>'+
+                                '<p class="techni_page_p_tag"><b>Time</b>:'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
+                                '<p class="techni_page_p_tag"><b>Location :</b>:'+value.address+'</p>'+
                                 '<button id="myBtn" class="start_camp_button start_camp_button_tech" data-id="'+value.id+'" style="background-color:#009A17; color: #fff;">Start Camp</button>'+
                                 '<div id="modal_container_tech_dash'+value.id+'" style="display: none"></div>'+
                             '</div>'+
@@ -437,10 +440,10 @@ myApp.onPageInit('technician_view', function(page) {
                     }
                     html += '<div class="camp_Id" >'+
                             '<h3><b>Camp Id :</b>'+value.id+'</h3>'+
-                            '<p><b>Doctor Name</b>: '+value.name+'</p>'+
-                            '<p><b>Booked Date</b>: '+date_to_date_string1(value.date)+'</p>'+
-                            '<p><b>Time</b>:'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
-                            '<p><b>Location : </b>'+value.address+'</p>'+
+                            '<p class="techni_page_p_tag"><b>Doctor Name</b>: '+value.name+'</p>'+
+                            '<p class="techni_page_p_tag"><b>Booked Date</b>: '+date_to_date_string1(value.date)+'</p>'+
+                            '<p class="techni_page_p_tag" ><b>Time</b>:'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
+                            '<p class="techni_page_p_tag"><b>Location : </b>'+value.address+'</p>'+
                             btn_lock+
                         '</div>'+
                         '<hr>';
@@ -557,8 +560,8 @@ myApp.onPageInit('calendar', function(page) {
             var sat = 'Sat';
             var sund = 'Sun';
 
-            var mnthtopass = '';
-            var yeartopass = '';
+            // var mnthtopass = '';
+            // var yeartopass = '';
 
             /* Get current date */
             var d = new Date();
@@ -594,6 +597,7 @@ myApp.onPageInit('calendar', function(page) {
                     yeartopass = yearNumber;
                     setMonth(parseInt(monthNumber) + 1, mon, tue, wed, thur, fri, sat, sund);
                 };
+                // next_prev_month = mnthtopass ; 
             });
 
             $('.btn-prev').on('click', function(e) {
@@ -610,6 +614,7 @@ myApp.onPageInit('calendar', function(page) {
                     yeartopass = yearNumber;
                     setMonth(parseInt(monthNumber) - 1, mon, tue, wed, thur, fri, sat, sund);
                 };
+                // next_prev_month = mnthtopass ; 
             });
 
             /* Get all dates for current month */
@@ -748,15 +753,19 @@ myApp.onPageInit('calendar', function(page) {
                             console.log(bf_color);
 
                             if (af_color == 'green') {
-                                classNames += ' afgreen';
+                               classNames += ' afgreen';
+                            } else if (af_color == 'orange') {
+                               classNames += ' aforange';
                             } else {
-                                classNames += ' afred';
+                               classNames += ' afred';
                             }
 
                             if (bf_color == 'green') {
-                                classNames += ' bfgreen';
+                               classNames += ' bfgreen';
+                            } else if (bf_color == 'orange') {
+                               classNames += ' bforange';
                             } else {
-                                classNames += ' bfred';
+                               classNames += ' bfred';
                             }
 
                             $('tbody.event-calendar tr td[date-month="'+Number(eventMonth)+'"][date-day="'+Number(eventDay)+'"]').removeClass('afgreen bfgreen afred bfred');
@@ -876,6 +885,8 @@ myApp.onPageInit('camp_list', function(page) {
         crossDomain: true,
         data: {
             "user_data" : token,
+            "mnthtopass": mnthtopass, 
+            "yeartopass": yeartopass,
         },
     })
     .done(function(res) {
@@ -894,14 +905,14 @@ myApp.onPageInit('camp_list', function(page) {
                     '<li class="item-content" style="border-left: '+border_color+' 8px solid" id="row_executed_camps_'+value.id+'">'+
                       '<div class="item-inner">'+
                           '<div class="item-title" style="min-width: 100% !important; white-space: normal;">'+
-                            '<p style="margin: 1px"><b>'+name[0]+date_to_date_string2(value.date)+value.id+'</b></p>'+
-                            '<p id="click_delete_'+value.id+'" style="margin: 0px !important; float: right">'+
+                            '<p class="camp_list_p_tag" style="margin: 1px"><b>'+name[0]+date_to_date_string2(value.date)+value.id+'</b></p>'+
+                            '<p class="camp_list_p_tag" id="click_delete_'+value.id+'" style="margin: 0px !important; float: right">'+
                                 '<a onclick="delete_executed_camp('+value.id+')"><i class="fa fa-trash-o" style="color:red;margin-top: 22px !important;font-size: 30px !important;" aria-hidden="true"></i><a/>'+
                             '</p>'+
-                            '<p style="margin: 1px">'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
-                            '<p style="margin: 1px">'+date_to_date_string2(value.date)+'</p>'+
-                            '<p style="margin: 1px">'+value.name+'</p>'+
-                            '<p style="margin: 1px">'+value.address+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+date_to_date_string2(value.date)+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+value.name+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+value.address+'</p>'+
                           '</div><br>'+
                       '</div>'+
                     '</li>';
@@ -914,11 +925,11 @@ myApp.onPageInit('camp_list', function(page) {
                     '<li class="item-content" style="border-left: #83BD71 8px solid" id="row_executed_camps_'+value.id+'">'+
                       '<div class="item-inner" onclick="go_to_camps_detail('+value.id+')">'+
                           '<div class="item-title" style="min-width: 100% !important; white-space: normal;">'+
-                            '<p style="margin: 1px"><b>'+name[0]+date_to_date_string2(value.date)+value.id+'</b></p>'+
-                            '<p style="margin: 1px">'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
-                            '<p style="margin: 1px">'+date_to_date_string2(value.date)+'</p>'+
-                            '<p style="margin: 1px">'+value.name+'</p>'+
-                            '<p style="margin: 1px">'+value.address+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px"><b>'+name[0]+date_to_date_string2(value.date)+value.id+'</b></p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+date_to_date_string2(value.date)+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+value.name+'</p>'+
+                            '<p class="camp_list_p_tag" style="margin: 1px">'+value.address+'</p>'+
                           '</div><br>'+
                       '</div>'+
                     '</li>';
@@ -964,25 +975,25 @@ myApp.onPageInit('camp_approved', function(page) {
                         '<div class="row" style="background-color: #F3F3F3;" id="row_'+value.id+'">'+
                             '<div class="row" style="width: 100%">'+
                                 '<div class="col-80">'+
-                                '<p style="margin: 20px 0px 0px 8px!important;">'+value.fam_name+','+value.machine_name+'</p>'+
+                                '<p class="camp_approved_p_tag" style="margin: 20px 0px 0px 8px;">'+value.fam_name+','+value.machine_name+'</p>'+
                                 '</div>'+
                                 '<div class="col-20" id="approved_section_'+value.id+'">'+
-                                  '<a onclick="camp_approved_click('+value.id+')"><img style="width: 55%;margin-top: 22px;float: right; padding-right: 9%;" src="img/tick_mark.png" alt=""></a>'+
+                                  '<a onclick="camp_approved_click('+value.id+')"><img style="width: 35%;margin-top: 22px;float: right; padding-right: 9%;" src="img/tick_mark.png" alt=""></a>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="col-100">'+
-                              '<p style="margin:0px 0px 0px 8px!important;">'+date_to_date_string1(value.date)+' '+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
+                              '<p class="camp_approved_p_tag" style="margin:0px 0px 0px 8px;">'+date_to_date_string1(value.date)+' '+tConvert(value.start_time)+'-'+tConvert(value.end_time)+'</p>'+
                             '</div>'+
                             '<div class="row" style="width: 100%;">'+
                                 '<div class="col-80">'+
-                                  '<p style="margin:0px 0px 0px 8px!important;">'+value.doctor_name+'</p>'+
+                                  '<p class="camp_approved_p_tag" style="margin:0px 0px 0px 8px;">'+value.doctor_name+'</p>'+
                                 '</div>'+
                                 '<div class="col-20" id="delete_section_'+value.id+'">'+
                                   '<a onclick="camp_delete_click('+value.id+')" ><i class="fa fa-trash-o" style="color:red;float: right; padding-right:21%;font-size:30px;" aria-hidden="true" data-id="'+value.id+'"></i></a>'+
                                 '</div>'+
                             '</div>'+
                             '<div class="col-100">'+
-                              '<p style="margin:0px 0px 20px 8px!important;">'+value.address+'</p>'+
+                              '<p class="camp_approved_p_tag" style="margin:0px 0px 20px 8px;">'+value.address+'</p>'+
                             '</div>'+
                         '</div>'+
                         '<hr style="margin: 0%">';
@@ -1222,6 +1233,8 @@ myApp.onPageInit('leader_board_screen', function(page) {
             crossDomain: true,
             data: {
                 "user_data" : token,
+                "mnthtopass": mnthtopass, 
+                "yeartopass": yeartopass,
             },
         })
         .done(function(res) {
@@ -1259,7 +1272,13 @@ myApp.onPageInit('leader_board_screen', function(page) {
                                         '<p class="leader_txt">High Risk</p>'+
                                     '</div>'+
                                     '<div class="col-20">'+
-                                        '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['high_risk']+'</p>'+
+                                        '<p class="leader_no"  style="color:#A7C8BD" >'+parseFloat(res.leaderboard_data[i]['high_risk'])/100+'%</p>'+
+                                    '</div>'+
+                                    '<div class="col-80">'+
+                                        '<p class="leader_txt">Machine Utilization</p>'+
+                                    '</div>'+
+                                    '<div class="col-20">'+
+                                        '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['machine_utilization']+'</p>'+
                                     '</div>'+
                                 '</div>'+
                             '</div>'+
@@ -1295,7 +1314,13 @@ myApp.onPageInit('leader_board_screen', function(page) {
                                             '<p class="leader_txt">High Risk</p>'+
                                         '</div>'+
                                         '<div class="col-20">'+
-                                            '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['high_risk']+'</p>'+
+                                            '<p class="leader_no"  style="color:#A7C8BD" >'+parseFloat(res.leaderboard_data[i]['high_risk'])/100+'%</p>'+
+                                        '</div>'+
+                                        '<div class="col-80">'+
+                                         '<p class="leader_txt">Machine Utilization</p>'+
+                                        '</div>'+
+                                        '<div class="col-20">'+
+                                            '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['machine_utilization']+'</p>'+
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+
@@ -1328,7 +1353,13 @@ myApp.onPageInit('leader_board_screen', function(page) {
                                             '<p class="leader_txt">High Risk</p>'+
                                         '</div>'+
                                         '<div class="col-20">'+
-                                            '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['high_risk']+'</p>'+
+                                            '<p class="leader_no"  style="color:#A7C8BD" >'+parseFloat(res.leaderboard_data[i]['high_risk'])/100+'%</p>'+
+                                        '</div>'+
+                                        '<div class="col-80">'+
+                                            '<p class="leader_txt">Machine Utilization</p>'+
+                                        '</div>'+
+                                        '<div class="col-20">'+
+                                            '<p class="leader_no"  style="color:#A7C8BD" >'+res.leaderboard_data[i]['machine_utilization']+'</p>'+
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+
@@ -1370,8 +1401,8 @@ myApp.onPageInit('camp_details', function(page) {
     $("#high_risk_patient_count_detail").text(camp_details_data.high_risk);
     $("#positive_patient_count_detail").text(camp_details_data.positive);
     $("#camp_details_actual_reg").text(camp_details_data.actual_registrations);
-    $("#camp_details_planned_reg ").text(camp_details_data.total_patients);
-    $("#male_patient_count_detail ").text(camp_details_data.male_percentage+"%");
+    $("#camp_details_planned_reg ").text(camp_details_data.expected_registration);
+    $("#male_patient_count_detail ").text(Math.round((parseFloat(camp_details_data.male_percentage)/parseFloat(camp_details_data.total_patients))*100)+"%");
      $.each(camp_details_data.camp_images, function(index, val) {
         $("#camp_details_images_txt").empty();
         if (index == 0 && !val.image) {
@@ -1395,6 +1426,15 @@ myApp.onPageInit('camp_details', function(page) {
 myApp.onPageInit('privacy_policy', function(page) {
     myApp.allowPanelOpen = true;
 });
+
+myApp.onPageInit('change_password', function(page) {
+    myApp.allowPanelOpen = true;
+    $("#email").val(token.email);
+    // console.log(next_prev_month);   
+    // $("confirm_new_password")
+    // console.log(token);
+});
+
 function load_machine_listing_details(dayEvent, monthEvent, yearEvent, token){
     $.ajax({
         url: base_url + '/machine_listing',

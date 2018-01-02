@@ -208,6 +208,8 @@ function submit_machine_booking(){
     var available_at_camp = $("#available_at_camp").val();
     var start_time = $("#start-time-input").val();
     var end_time = $("#end-time-input").val();
+    var doctor_speciality = $("#doctor_speciality").val();
+    var doctor_type = $("#doctor_type").val();
     // console.log("doctor_name :"+doctor_name+' doctor_address :'+doctor_address+" clinic_camp :"+clinic_camp+
         // " expected_number_of_registration :"+expected_number_of_registration+" block_machine :"+block_machine+
         // " start-time-input :"+start_time+" end-time-input :"+end_time+ " selected_date "+selected_date+" machine_name_global :"+machine_name_global);
@@ -219,9 +221,15 @@ function submit_machine_booking(){
     if (doctor_name == 0) {
         myApp.alert('Select Doctor');
         return false;
+    }else if (doctor_speciality == 0) {
+        myApp.alert('Select Doctor Speciality');
+        return false;
     }else if(doctor_address == ''){
          myApp.alert('Enter Address of clinic or hospital');
          return false;
+    }else if (doctor_type == 0) {
+        myApp.alert('Select Doctor type');
+        return false;
     }else if (clinic_camp == 0) {
         myApp.alert('Select Camp or Clinic');
         return false;
@@ -255,6 +263,8 @@ function submit_machine_booking(){
             crossDomain: true,
             data: {
                 "doctor_id" : doctor_name,
+                "doctor_speciality" : doctor_speciality,
+                "doctor_type" : doctor_type,
                 "camp_clinic" : clinic_camp,
                 "start_time" : start_time,
                 "end_time" : end_time,
@@ -275,8 +285,8 @@ function submit_machine_booking(){
                 // console.log(res.insert_data);
                 machine_name_global = '';
                 selected_date = '';
-                $("#doctor-list,#clinic_camp").val(0);
-                $("#doctor_speciality,#doctor_address,#doctor_type,#expected_number_of_registration,#start-time-input,#end-time-input").val('');
+                $("#doctor-list,#clinic_camp,#doctor_speciality,#doctor_type").val(0);
+                $("#doctor_address,#expected_number_of_registration,#start-time-input,#end-time-input").val('');
                 $("#block_machine,#available_at_camp").attr('checked', false);
                 mainView.router.load({
                     url: 'calendar.html',
@@ -304,6 +314,8 @@ function submit_machine_booking(){
             crossDomain: true,
             data: {
                 "doctor_id" : doctor_name,
+                "doctor_speciality" : doctor_speciality,
+                "doctor_type " : doctor_type,
                 "camp_clinic" : clinic_camp,
                 "start_time" : start_time,
                 "end_time" : end_time,
@@ -326,8 +338,8 @@ function submit_machine_booking(){
                 machine_name_global = '';
                 selected_date = '';
                 clinic_more_date = [];
-                $("#doctor-list,#clinic_camp").val(0);
-                $("#doctor_speciality,#doctor_address,#doctor_type,#expected_number_of_registration,#start-time-input,#end-time-input").val('');
+                $("#doctor-list,#clinic_camp,#doctor_speciality,#doctor_type").val(0);
+                $("#doctor_address,#expected_number_of_registration,#start-time-input,#end-time-input").val('');
                 $("#block_machine,#available_at_camp").attr('checked', false);
                 mainView.router.load({
                     url: 'calendar.html',
@@ -429,34 +441,39 @@ function camp_delete_click(id){
 
 //delete camp executed
 function delete_executed_camp(id){
-    if ( !id == '') {
-        var row_delet = '#click_delete_'+id;
-        $(row_delet).click(function(){
-            $('#row_executed_camps_'+id).remove();
-        })
-        // return false;
-        $.ajax({
-            url: base_url + '/delete_camp',
-            type: 'POST',
-            crossDomain: true,
-            data: {
-                "camp_id" : id,
-            },
-        })
-        .done(function(res) {
-            if (res.status == 'SUCCESS') {
-                myApp.alert(res.message);
-            }else{
-                myApp.alert(res.message);  
-            } 
-        })
-        .fail(function(err) {
-            myApp.hideIndicator();
-            myApp.alert('Some error occurred on connecting.');
-            // console.log('fail: ' + j2s(err));
-        })
-        // .always(function() {});
-    } 
+     myApp.confirm('Are you sure?', 'Delete Camps', 
+      function () {
+        if ( !id == '') {
+            var row_delet = '#click_delete_'+id;
+            $(row_delet).click(function(){
+                $('#row_executed_camps_'+id).remove();
+            })
+            // return false;
+            $.ajax({
+                url: base_url + '/delete_camp',
+                type: 'POST',
+                crossDomain: true,
+                data: {
+                    "camp_id" : id,
+                },
+            })
+            .done(function(res) {
+                if (res.status == 'SUCCESS') {
+                    myApp.alert(res.message);
+                }else{
+                    myApp.alert(res.message);  
+                } 
+            })
+            .fail(function(err) {
+                myApp.hideIndicator();
+                myApp.alert('Some error occurred on connecting.');
+                // console.log('fail: ' + j2s(err));
+            })
+            // .always(function() {});
+        } 
+      },
+    );
+
 }
 
 function go_to_camps_detail(id){
@@ -938,3 +955,55 @@ function body_click(){
          active_counter = 0;
     })
 }
+
+function change_password(){
+    var email = $("#email").val();
+    var current_password = $("#current_password").val();
+    var new_password = $("#new_password").val();
+    var confirm_new_password = $("#confirm_new_password").val();
+
+    if (current_password == '') {
+        myApp.alert('Current Password is empty');
+        return false;
+    } else if (new_password == '') {
+        myApp.alert('New Password is empty');
+        return false;
+    } else if (confirm_new_password == '') {
+        myApp.alert('Confirm New Password is empty');
+        return false;
+    } else if (!confirm_new_password.match(new_password)) {
+        myApp.alert('Confirm New Password is not match with New password');
+        return false;
+    }
+
+    myApp.showIndicator();
+    $.ajax({
+        url: base_url + '/change_password',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            "email" : email,
+            "current_password" : current_password,
+            "new_password" : new_password,
+        },
+    })
+    .done(function(res) {
+        // console.log('done: ' + j2s(res));
+        if (res.status == 'SUCCESS') {
+            myApp.alert(res.message);
+            logout();
+            // // console.log(res.doctors_data);
+        }else{
+            myApp.alert(res.message);  
+        } 
+    })
+    .fail(function(err) {
+        myApp.hideIndicator();
+        myApp.alert('Some error occurred on connecting.');
+        // console.log('fail: ' + j2s(err));
+    })
+    .always(function() {
+        myApp.hideIndicator();
+    });
+}
+

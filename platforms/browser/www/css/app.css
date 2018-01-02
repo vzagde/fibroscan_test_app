@@ -470,6 +470,19 @@ table {
     width: 6px;
 }
 
+.aforange:after {
+    background: #FB7D22;
+    border-radius: 50%;
+    bottom: 8px;
+    display: block;
+    content: '';
+    height: 6px;
+    left: 50%;
+    margin: -4px 0 0 -10px;
+    position: absolute;
+    width: 6px;
+}
+
 .bfgreen:before {
     background: #0ac748;
     border-radius: 50%;
@@ -485,6 +498,19 @@ table {
 
 .bfred:before {
     background: #f31c06;
+    border-radius: 50%;
+    bottom: 8px;
+    display: block;
+    content: '';
+    height: 6px;
+    left: 50%;
+    margin: -4px 0 0 4px;
+    position: absolute;
+    width: 6px;
+}
+
+.bforange:before {
+    background: #FB7D22;
     border-radius: 50%;
     bottom: 8px;
     display: block;
@@ -643,6 +669,14 @@ input[type=checkbox]:checked:hover + span {
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
 /* STYLES GO HERE */
+  .camp_Id p{
+    /*margin:0px 0px;*/
+
+  }
+
+  .entryA p{
+    margin:0px 0px!important; 
+  }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -655,6 +689,14 @@ and (min-width : 321px) {
 @media only screen
 and (max-width : 320px) {
 /* STYLES GO HERE */
+  .camp_Id p{
+    margin:0px 0px;
+
+  }
+
+  .entryA p{
+    margin:0px 0px!important; 
+  }
 }
 
 /* iPads (portrait and landscape) ----------- */
@@ -662,6 +704,94 @@ and (max-width : 320px) {
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
 /* STYLES GO HERE */
+  h1,h2,h3,h4,h5,h6,p,a,td,tr,input,button,b,select{
+    font-size: 30px !important;
+  }
+  table {
+   width: 112% !important;
+  }
+  .modal{
+    width: 450px;
+    left: 40%;
+    font-size: 24px !important;
+    border: 2px solid #1095d2;
+  }
+
+  input.modal-text-input{
+    height: 46px;
+  }
+
+  .modal-button{
+    font-size:24px;
+  }
+  .panel {
+    width: 55% !important;
+  }
+
+  .page-content{
+    overflow-x: hidden !important;
+  }
+
+  /*.machine_select_radio{
+    width: 24px !important;
+    height: 25px !important;
+    margin-top: 5px !important;
+  }*/
+
+  .wpa{
+    margin-top: 16%;
+  }
+
+  .prev_abhishek{
+    margin-bottom:2px;
+  }
+  .list-block input[type=time], .list-block input[type=number], .list-block input[type=text], .list-block input[type=password], .list-block input[type=search], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block select, .list-block textarea{
+    height: 80px;
+  }
+
+  .clock-item-content {
+    margin-top: 26px;
+  }
+
+  #start-time-clock, #end-time-clock {
+    padding: 22px 0 !important;
+  }
+
+  .icn{
+    font-size: 48px;
+  }
+
+  #block_machine,#available_at_camp {
+    transform: scale(1.8) !important;
+  }
+
+  .p_tag{
+    margin: 18px !important;
+  }
+
+  .p_tag1{
+       margin: 25px 0px 0px 8px !important;
+  }
+
+  .p_tag2{
+       margin: 25px 0px 20px 8px !important;
+  }
+
+  .delete_icon{
+    font-size: 51px !important;
+  }
+
+  .row.no-gutter .col-75{
+    height: 70%;
+  }
+
+  .row.no-gutter .col-25 {
+    height: 70%;
+  }
+
+  #techni {
+    font-size: 30px;
+  }
 }
 
 /* iPads (landscape) ----------- */
@@ -678,6 +808,124 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px)
 and (orientation : portrait) {
 /* STYLES GO HERE */
+  h1,h2,h3,h4,h5,h6,p,a,td,tr,input,button,b,select{
+    font-size: 30px !important;
+  }
+  table {
+   width: 112% !important;
+  }
+  .modal{
+    width: 450px;
+    left: 40%;
+    font-size: 24px !important;
+    border: 2px solid #1095d2;
+  }
+
+  input.modal-text-input{
+    height: 46px;
+  }
+
+  .modal-button{
+    font-size:24px;
+  }
+  .panel {
+    width: 55% !important;
+  }
+
+  .page-content{
+    overflow-x: hidden !important;
+  }
+
+  /*.machine_select_radio{
+    width: 24px !important;
+    height: 25px !important;
+    margin-top: 5px !important;
+  }*/
+
+  .wpa{
+    margin-top: 16%;
+  }
+
+  .prev_abhishek{
+    margin-bottom:2px;
+  }
+  .list-block input[type=time], .list-block input[type=number], .list-block input[type=text], .list-block input[type=password], .list-block input[type=search], .list-block input[type=email], .list-block input[type=tel], .list-block input[type=url], .list-block input[type=date], .list-block input[type=datetime-local], .list-block select, .list-block textarea{
+    height: 80px;
+  }
+
+  .clock-item-content {
+    margin-top: 26px;
+  }
+
+  #start-time-clock, #end-time-clock {
+    padding: 22px 0 !important;
+  }
+
+  .icn{
+    font-size: 48px;
+  }
+
+  #block_machine,#available_at_camp {
+    transform: scale(1.8) !important;
+  }
+
+  .p_tag{
+    margin: 18px !important;
+  }
+
+  .p_tag1{
+       margin: 25px 0px 0px 8px !important;
+  }
+
+  .p_tag2{
+       margin: 25px 0px 20px 8px !important;
+  }
+
+  .delete_icon{
+    font-size: 51px !important;
+  }
+
+  .row.no-gutter .col-75{
+    height: 70%;
+  }
+
+  .row.no-gutter .col-25 {
+    height: 70%;
+  }
+
+  #techni {
+    font-size: 30px;
+  }
+
+  .prev_abhishek{
+    /*margin : 1.5% 0% !important ;*/
+  }
+
+  .camp_list_page{
+    padding-top: 6%;
+  }
+
+  .camp_list_p_tag{
+    margin-bottom: 2% !important;
+  }
+
+  .camp_approved_p_tag{
+    margin-bottom: 2% !important;
+  }
+
+  .camp_tab{
+    height: 100px;
+    line-height: 20px;
+  }
+
+  .camp_Id p{
+    /*margin-bottom: 2% !important;*/
+  }
+
+  .privacy_page div{
+    font-family: 'Brandon Grotesque'!important;
+  }
+
 }
 
 /* Desktops and laptops ----------- */
@@ -705,6 +953,14 @@ and (min-device-width : 320px)
 and (max-device-width : 568px)
 and (orientation : landscape) {
 /* STYLES GO HERE */
+  .entryA p{
+    margin:0px 0px!important; 
+  }
+
+  .camp_Id p{
+    margin:0px 0px;
+
+  }
 }
 
 /* iPhone 5 (portrait)----------- */
@@ -713,6 +969,14 @@ and (min-device-width : 320px)
 and (max-device-width : 568px)
 and (orientation : portrait) {
 /* STYLES GO HERE */
+  .entryA p{
+    margin:0px 0px!important; 
+  }
+
+  .camp_Id p{
+    margin:0px 0px;
+
+  }
 }
 
 .input:focus {
@@ -775,7 +1039,7 @@ and (orientation : portrait) {
   padding: 3% 0% 0% 5%;
 }
 .camp_Id p{
-  margin:0px 0px!important;
+  /*margin:0px 0px;*/
 
 }
 
